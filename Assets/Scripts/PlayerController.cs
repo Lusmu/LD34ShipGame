@@ -15,7 +15,14 @@ namespace IfelseMedia.GuideShip
 
         void Update()
         {
-            ship.Rudder = Input.GetAxis("Horizontal");
+			if (Input.touchCount == 1) 
+			{
+				ship.Rudder = Input.touches [0].position.x < Screen.width * 0.5f ? -1 : 1;
+			}
+			else 
+			{
+				ship.Rudder = Input.GetAxis("Horizontal");
+			}
         }
     }
 }
