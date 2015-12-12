@@ -18,7 +18,7 @@ namespace IfelseMedia.GuideShip
         [SerializeField]
         private float prediction = 5;
 
-        void Update()
+        void LateUpdate()
         {
             if (target != null)
             {
