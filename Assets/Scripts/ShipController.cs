@@ -5,6 +5,13 @@ namespace IfelseMedia.GuideShip
     [RequireComponent(typeof(Rigidbody))]
     public class ShipController : MonoBehaviour
     {
+		[SerializeField]
+		private float hitPoins = 10;
+		[SerializeField]
+		private float armor = 1;
+
+		private float damage;
+
         [SerializeField]
         private Transform visualsRoot;
         [SerializeField]
@@ -29,6 +36,8 @@ namespace IfelseMedia.GuideShip
         private float speedForMaxRudder = 5;
 
         private Rigidbody physics;
+
+		public bool IsSinking { get; private set; }
 
         private float thrust;
         public float Thrust
@@ -55,6 +64,8 @@ namespace IfelseMedia.GuideShip
 
         void FixedUpdate()
         {
+			if (IsSinking) return;
+
             var appliedRudder = Rudder * (1 - (speedForMaxRudder - physics.velocity.magnitude) / speedForMaxRudder) * maxRudder;
 
             physics.drag = TurnDependentDrag(appliedRudder);
@@ -86,5 +97,56 @@ namespace IfelseMedia.GuideShip
             var rock = Mathf.MoveTowardsAngle(visualsRoot.localEulerAngles.z, targetRock, Time.deltaTime * 30);
             visualsRoot.transform.localEulerAngles = Vector3.forward * rock;
         }
+
+		void OnCollisionEnter(Collision col)
+		{
+			bool underWaterline = false;
+			for (int i = 0; i < col.contacts.Length; i++) 
+			{
+				if (col.contacts [i].point.y < 0) 
+				{
+					underWaterline = true;
+					break;
+				}
+			}
+
+			float newDamage = col.impulse.sqrMagnitude;
+			if (underWaterline) newDamage *= 2;
+
+			if (newDamage > armor) 
+			{
+				damage += newDamage - armor;
+				Debug.Log ("Damage: " + damage, gameObject);
+				if (damage >= hitPoins) 
+				{
+					Sink ();
+				}
+			}
+		}
+
+		public void Sink()
+		{
+			if (IsSinking) return;
+		
+			Debug.Log ("Ship sunk", gameObject);
+
+			StartCoroutine (Sink_Coroutine ());
+		}
+
+		IEnumerator Sink_Coroutine()
+		{
+			IsSinking = true;
+
+			physics.freezeRotation = false;
+			physics.constraints = RigidbodyConstraints.None;
+
+			yield return new WaitForSeconds (2);
+
+			physics.drag = 10;
+
+			physics.useGravity = true;
+
+			Destroy (this);
+		}
     }
 }

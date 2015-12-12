@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace IfelseMedia.GuideShip
 {
-    [RequireComponent(typeof(ShipController))]
     public class TransportAIController : MonoBehaviour
     {
         private ShipController ship;
@@ -26,41 +25,54 @@ namespace IfelseMedia.GuideShip
 
         void Update()
         {
-            if (beacons.Count > 0)
-            {
-                var beacon = beacons[0];
-                if (beacon != null)
-                {
-                    var sqrDistance = (transform.position - beacon.transform.position).sqrMagnitude;
-                    if (sqrDistance > 2) ship.Thrust = 1;
-                    else ship.Thrust = -0.1f;
+			if (!ship) return;
 
-                    Vector3 relativePos = beacon.transform.position - transform.position;
+			if (ship.IsSinking) 
+			{
+				if (distressTorch) distressTorch.Stop (true);
+				if (happyTorch) happyTorch.Stop (true);
+			}
+			else 
+			{
+				if (beacons.Count > 0)
+				{
+					var beacon = beacons[0];
+					if (beacon != null)
+					{
+						var sqrDistance = (transform.position - beacon.transform.position).sqrMagnitude;
+						if (sqrDistance > 25) ship.Thrust = 1;
+						else ship.Thrust = -0.1f;
 
-                    var deltaRotation = AngleDir(transform.forward, relativePos, Vector3.up);
+						Vector3 relativePos = beacon.transform.position - transform.position;
 
-                    if (deltaRotation < 0) ship.Rudder = -1;
-                    else if (deltaRotation > 0) ship.Rudder = 1;
-                    else ship.Rudder = 0;
-                }
-                else
-                {
-                    beacons.RemoveAt(0);
-                }
-            }
-            else
-            {
-                ship.Thrust = 0;
-            }
+						var deltaRotation = AngleDir(transform.forward, relativePos, Vector3.up);
+
+						if (deltaRotation < 0) ship.Rudder = -1;
+						else if (deltaRotation > 0) ship.Rudder = 1;
+						else ship.Rudder = 0;
+					}
+					else
+					{
+						beacons.RemoveAt(0);
+					}
+				}
+				else
+				{
+					ship.Thrust = 0;
+				}
+			}
+            
         }
 
         public void EnteredBeaconRange(Beacon beacon)
         {
+			if (ship.IsSinking) return;
+
 			if (beacons.Count == 0) 
 			{
-				if (happyFlare) happyFlare.Play ();
-				if (distressTorch) distressTorch.Stop ();
-				if (happyTorch) happyTorch.Play ();
+				if (happyFlare) happyFlare.Play (true);
+				if (distressTorch) distressTorch.Stop (true);
+				if (happyTorch) happyTorch.Play (true);
 			}
 
 			if (!beacons.Contains (beacon)) 
@@ -72,16 +84,18 @@ namespace IfelseMedia.GuideShip
 
         public void ExitBeaconRange(Beacon beacon)
         {
-            if (beacons.Contains(beacon)) beacons.Remove(beacon);
+			if (ship.IsSinking) return;
 
-			if (beacons.Count == 0) 
+			if (beacons.Count == 1) 
 			{
-				if (distressFlare) distressFlare.Play ();
-				if (distressTorch) distressTorch.Play ();
-				if (happyTorch) happyTorch.Stop ();
+				if (distressFlare) distressFlare.Play (true);
+				if (distressTorch) distressTorch.Play (true);
+				if (happyTorch) happyTorch.Stop (true);
 
 				Debug.Log ("Ship lost beacon", gameObject);
 			}
+
+            if (beacons.Contains(beacon)) beacons.Remove(beacon);
         }
 
         float AngleDir(Vector3 fwd, Vector3 targetDir, Vector3 up)

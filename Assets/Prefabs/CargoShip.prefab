@@ -334,6 +334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfac5854ef3679248ace09cf506096d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPoins: 5
+  armor: 0.25
   visualsRoot: {fileID: 412200}
   rockAmount: 8
   maxThrustForward: 7
@@ -3450,7 +3452,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: armor
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: hitPoins
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 124876}
