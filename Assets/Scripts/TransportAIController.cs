@@ -10,6 +10,15 @@ namespace IfelseMedia.GuideShip
         private ShipController ship;
         private List<Beacon> beacons = new List<Beacon>();
 
+		[SerializeField]
+		private ParticleSystem distressTorch;
+		[SerializeField]
+		private ParticleSystem happyTorch;
+		[SerializeField]
+		private ParticleSystem distressFlare;
+		[SerializeField]
+		private ParticleSystem happyFlare;
+
         void Awake()
         {
             ship = GetComponent<ShipController>();
@@ -47,12 +56,32 @@ namespace IfelseMedia.GuideShip
 
         public void EnteredBeaconRange(Beacon beacon)
         {
-            if (!beacons.Contains(beacon)) beacons.Add(beacon);
+			if (beacons.Count == 0) 
+			{
+				if (happyFlare) happyFlare.Play ();
+				if (distressTorch) distressTorch.Stop ();
+				if (happyTorch) happyTorch.Play ();
+			}
+
+			if (!beacons.Contains (beacon)) 
+			{
+				Debug.Log ("Ship found beacon", gameObject);
+				beacons.Add (beacon);
+			}
         }
 
         public void ExitBeaconRange(Beacon beacon)
         {
             if (beacons.Contains(beacon)) beacons.Remove(beacon);
+
+			if (beacons.Count == 0) 
+			{
+				if (distressFlare) distressFlare.Play ();
+				if (distressTorch) distressTorch.Play ();
+				if (happyTorch) happyTorch.Stop ();
+
+				Debug.Log ("Ship lost beacon", gameObject);
+			}
         }
 
         float AngleDir(Vector3 fwd, Vector3 targetDir, Vector3 up)
