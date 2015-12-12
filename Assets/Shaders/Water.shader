@@ -15,7 +15,7 @@
 		Blend One One
 
 		CGPROGRAM
-		#pragma surface surf BlinnPhong vertex:vert
+		#pragma surface surf BlinnPhong vertex:vert alpha
 
 		sampler2D _MainTex;
 		float _Amount;

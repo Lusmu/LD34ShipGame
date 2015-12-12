@@ -10,7 +10,7 @@ namespace IfelseMedia.GuideShip
         // Use this for initialization
         void Start()
         {
-
+            ship.Thrust = 1;
         }
 
         void Update()

@@ -10,8 +10,9 @@ GameObject:
   - 4: {fileID: 419604}
   - 114: {fileID: 11469820}
   - 54: {fileID: 5465444}
+  - 114: {fileID: 11472626}
   m_Layer: 0
-  m_Name: Player
+  m_Name: CargoShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.13, y: 0, z: -0.24}
+  m_LocalPosition: {x: -8.03, y: 0, z: 5.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 407126}
@@ -196,11 +197,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnForcePosition: {fileID: 0}
-  maxThrustForward: 7
-  minDrag: 2
-  maxDrag: 3
-  maxRudder: 80
-  speedForMaxRudder: 2
+  maxThrustForward: 6
+  minDrag: 2.5
+  maxDrag: 4
+  maxRudder: 70
+  speedForMaxRudder: 3
+--- !u!114 &11472626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af742c976c75fbd4eb3659113d257c43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13604720
 CapsuleCollider:
   m_ObjectHideFlags: 1

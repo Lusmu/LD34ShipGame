@@ -28,6 +28,19 @@ namespace IfelseMedia.GuideShip
 
         private Rigidbody physics;
 
+        private float thrust;
+        public float Thrust
+        {
+            get
+            {
+                return thrust;
+            }
+            set
+            {
+                thrust = Mathf.Clamp(value, -1, 1);
+            }
+        }
+
         void Start()
         {
             physics = GetComponent<Rigidbody>();
@@ -39,10 +52,15 @@ namespace IfelseMedia.GuideShip
 
             physics.drag = TurnDependentDrag(appliedRudder);
 
+            var localEuler = transform.localEulerAngles;
+            localEuler.x = 0;
+            localEuler.z = 0;
+            transform.localEulerAngles = localEuler;
+
             Quaternion deltaRotation = Quaternion.Euler(Vector3.up * appliedRudder * Time.deltaTime);
             physics.MoveRotation(physics.rotation * deltaRotation);
 
-            physics.AddRelativeForce(Vector3.forward * maxThrustForward, ForceMode.Force);
+            physics.AddRelativeForce(thrust * Vector3.forward * maxThrustForward, ForceMode.Force);
         }
 
         float TurnDependentDrag(float turn)
