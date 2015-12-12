@@ -6,7 +6,9 @@ namespace IfelseMedia.GuideShip
     public class ShipController : MonoBehaviour
     {
         [SerializeField]
-        private Transform turnForcePosition;
+        private Transform visualsRoot;
+        [SerializeField]
+        public float rockAmount = 8;
 
         [SerializeField]
         private float maxThrustForward = 10;
@@ -46,6 +48,11 @@ namespace IfelseMedia.GuideShip
             physics = GetComponent<Rigidbody>();
         }
 
+        void Update()
+        {
+            RockShip();
+        }
+
         void FixedUpdate()
         {
             var appliedRudder = Rudder * (1 - (speedForMaxRudder - physics.velocity.magnitude) / speedForMaxRudder) * maxRudder;
@@ -66,6 +73,18 @@ namespace IfelseMedia.GuideShip
         float TurnDependentDrag(float turn)
         {
             return minDrag + (maxDrag - minDrag) * (Mathf.Abs(turn) / maxRudder);
+        }
+
+        void RockShip()
+        {
+            if (visualsRoot == null) return;
+
+            var targetRock = rockAmount * (Mathf.Sin(Time.time) + Rudder * 2);
+
+            
+
+            var rock = Mathf.MoveTowardsAngle(visualsRoot.localEulerAngles.z, targetRock, Time.deltaTime * 30);
+            visualsRoot.transform.localEulerAngles = Vector3.forward * rock;
         }
     }
 }
