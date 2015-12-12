@@ -39,6 +39,8 @@ namespace IfelseMedia.GuideShip
 
 		public bool IsSinking { get; private set; }
 
+		private float stationaryTime = 0;
+
         private float thrust;
         public float Thrust
         {
@@ -79,6 +81,17 @@ namespace IfelseMedia.GuideShip
             physics.MoveRotation(physics.rotation * deltaRotation);
 
             physics.AddRelativeForce(thrust * Vector3.forward * maxThrustForward, ForceMode.Force);
+
+			if (Thrust > 0.75f && physics.velocity.sqrMagnitude < 0.1f) 
+			{
+				stationaryTime += Time.deltaTime;
+
+				if (stationaryTime > 1) TakeDamage (Time.deltaTime * 0.5f, true);
+			}
+			else 
+			{
+				stationaryTime = 0;
+			}
         }
 
         float TurnDependentDrag(float turn)
@@ -91,8 +104,6 @@ namespace IfelseMedia.GuideShip
             if (visualsRoot == null) return;
 
             var targetRock = rockAmount * (Mathf.Sin(Time.time) + Rudder * 2);
-
-            
 
             var rock = Mathf.MoveTowardsAngle(visualsRoot.localEulerAngles.z, targetRock, Time.deltaTime * 30);
             visualsRoot.transform.localEulerAngles = Vector3.forward * rock;
@@ -113,9 +124,15 @@ namespace IfelseMedia.GuideShip
 			float newDamage = col.impulse.sqrMagnitude;
 			if (underWaterline) newDamage *= 2;
 
-			if (newDamage > armor) 
+			TakeDamage (newDamage);
+		}
+
+		public void TakeDamage(float amount, bool ignoreArmor = false)
+		{
+			if (ignoreArmor || amount > armor) 
 			{
-				damage += newDamage - armor;
+				if (!ignoreArmor) amount -= armor;
+				damage += amount;
 				Debug.Log ("Damage: " + damage, gameObject);
 				if (damage >= hitPoins) 
 				{
