@@ -7,7 +7,7 @@ public class Despawnable : MonoBehaviour
 	{
 		if (enabled && other.tag == "Despawner") 
 		{
-			gameObject.SetActive (false);
+			//gameObject.SetActive (false);
 		}
 	}
 }

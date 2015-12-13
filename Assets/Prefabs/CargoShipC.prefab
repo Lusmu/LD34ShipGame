@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &117744
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 472294}
+  - 120: {fileID: 12050634}
+  m_Layer: 0
+  m_Name: TowRenderer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &119114
 GameObject:
   m_ObjectHideFlags: 1
@@ -68,7 +84,7 @@ GameObject:
   m_Layer: 0
   m_Name: CargoShipC
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -119,6 +135,7 @@ Transform:
   m_Children:
   - {fileID: 442628}
   - {fileID: 483156}
+  - {fileID: 472294}
   m_Father: {fileID: 467666}
   m_RootOrder: 2
 --- !u!4 &425762
@@ -140,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194602}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 1.8, z: -0.10000008}
+  m_LocalPosition: {x: -0, y: 0.755, z: 0.732}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 412010}
@@ -164,7 +181,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141616}
   m_LocalRotation: {x: 0, y: -0.40362516, z: 0, w: 0.91492444}
-  m_LocalPosition: {x: -50.4, y: 0, z: 7.8}
+  m_LocalPosition: {x: -62.2, y: 0, z: 3.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458504}
@@ -172,6 +189,18 @@ Transform:
   - {fileID: 412010}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &472294
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.328, z: 1.159}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412010}
+  m_RootOrder: 2
 --- !u!4 &483156
 Transform:
   m_ObjectHideFlags: 1
@@ -179,7 +208,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119114}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 1.8, z: -0.10000008}
+  m_LocalPosition: {x: -0, y: 0.755, z: 0.732}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 412010}
@@ -333,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToFullThrust: 40
+  towLine: {fileID: 12050634}
   distressTorch: {fileID: 19824448}
   happyTorch: {fileID: 19851660}
   distressFlare: {fileID: 0}
@@ -371,6 +401,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 1.4
   wind: {x: 0.5, y: 0, z: 0}
+--- !u!120 &12050634
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117744}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 84142002cb80ba64997f4f1a83e52016, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 0.1
+    endWidth: 0.025
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 1426061756
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 2466248637
+  m_UseWorldSpace: 1
 --- !u!136 &13611082
 CapsuleCollider:
   m_ObjectHideFlags: 1

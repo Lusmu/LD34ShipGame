@@ -54,6 +54,8 @@ namespace IfelseMedia.GuideShip
         {
             if (stage <= currentBeaconStage) return;
 
+            currentBeaconStage = stage;
+
             bool updated = false;
             switch (stage)
             {

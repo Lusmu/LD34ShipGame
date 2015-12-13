@@ -1140,7 +1140,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos B (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1227,7 +1227,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos C (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4681,48 +4681,6 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 19806862, guid: 7fa9ddc2965d50e4bafd0e2e63ae99da,
     type: 2}
   m_PrefabInternal: {fileID: 2053673178}
---- !u!1001 &539623652
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 467666, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -62.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 467666, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467666, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 3.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 467666, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467666, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0.40362516
-      objectReference: {fileID: 0}
-    - target: {fileID: 467666, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467666, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.91492444
-      objectReference: {fileID: 0}
-    - target: {fileID: 467666, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-      propertyPath: m_RootOrder
-      value: 24
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &544838186
 Prefab:
   m_ObjectHideFlags: 0
@@ -4788,7 +4746,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos C
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5337,7 +5295,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5355,8 +5313,8 @@ MonoBehaviour:
   prefab: {fileID: 11440396, guid: 39f129ece5437ce4ba258fa875b67dc3, type: 2}
   minPlayerScore: 0
   maxPlayerScore: 0
-  spawnCheckRadius: 2
-  spawnRadius: 10
+  spawnCheckRadius: 3
+  spawnRadius: 30
   spawnInterval: 300
   maxShips: 3
 --- !u!4 &613491998
@@ -7994,7 +7952,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos B(3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -8434,7 +8392,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos (5)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -10313,7 +10271,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos C (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -10367,7 +10325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 11483888, guid: 890e89ed44565db49b60307c2ae20090, type: 2}
-  minPlayerScore: 5
+  minPlayerScore: 1
   maxPlayerScore: 0
   spawnCheckRadius: 4
   spawnRadius: 120
@@ -11687,7 +11645,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos C (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -11836,7 +11794,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos (4)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -12923,7 +12881,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -13010,7 +12968,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos C (4)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -14899,7 +14857,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -16126,7 +16084,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShipSpawnPos (6)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -16183,7 +16141,7 @@ MonoBehaviour:
   minPlayerScore: 7
   maxPlayerScore: 0
   spawnCheckRadius: 20
-  spawnRadius: 50
+  spawnRadius: 60
   spawnInterval: 100
   maxShips: 3
 --- !u!4 &1946799523
@@ -16967,6 +16925,11 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 173187958}
+    - target: {fileID: 104344, guid: 7fa9ddc2965d50e4bafd0e2e63ae99da, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7fa9ddc2965d50e4bafd0e2e63ae99da, type: 2}
   m_IsPrefabParent: 0

@@ -33,33 +33,41 @@ namespace IfelseMedia.GuideShip
 		{
             if (minPlayerScore > 0 && GameManager.Instace.Player.Score < minPlayerScore) return;
 
-            if (minPlayerScore > 0 && GameManager.Instace.Player.Score > maxPlayerScore) return;
+            if (maxPlayerScore > 0 && GameManager.Instace.Player.Score > maxPlayerScore) return;
 
-            if (timeTillNextSpawn <= 0 && IsInDespawnerRange()) 
-			{
+            //if (timeTillNextSpawn <= 0 && IsInDespawnerRange()) 
+            if (timeTillNextSpawn <= 0)
+            {
 				var randomPosition = transform.position +
 					Vector3.forward * Random.Range(-spawnRadius, spawnRadius) +
 					Vector3.right * Random.Range(-spawnRadius, spawnRadius);
 
 				Collider[] res = new Collider[0];
-				if (Physics.OverlapSphereNonAlloc (randomPosition, spawnCheckRadius, res) == 0) 
+				if (Physics.OverlapSphereNonAlloc(randomPosition, spawnCheckRadius, res) == 0) 
 				{
-					if (shipPool == null) 
-					{
-                        shipPool = new ObjectPooler<TransportAIController>(prefab.gameObject, 1, maxShips);
-					}
+                    if (res.Length == 0)
+                    {
+                        if (shipPool == null)
+                        {
+                            shipPool = new ObjectPooler<TransportAIController>(prefab.gameObject, 1, maxShips);
+                        }
 
-					var ship = shipPool.Get ();
+                        var ship = shipPool.Get();
 
-					if (ship != null) 
-					{
-						Debug.Log ("Got ship");
-						timeTillNextSpawn = spawnInterval;
+                        if (ship != null)
+                        {
+                            Debug.Log("Got ship");
+                            timeTillNextSpawn = spawnInterval;
 
-						ship.transform.position = randomPosition;
-						ship.transform.rotation = transform.rotation;
-					}
-				}
+                            ship.transform.position = randomPosition;
+                            ship.transform.rotation = transform.rotation;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Checksphere fail " + res.Length);
+                    }
+                }
 				else
 				{
 					Debug.Log ("Checksphere fail " + res.Length);

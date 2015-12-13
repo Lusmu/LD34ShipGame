@@ -28,6 +28,7 @@ namespace IfelseMedia.GuideShip
 		void Awake()
 		{
 			instance = this;
+            Application.targetFrameRate = 60;
 		}
 
         void OnEnable()
