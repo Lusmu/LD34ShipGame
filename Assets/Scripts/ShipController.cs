@@ -91,7 +91,7 @@ namespace IfelseMedia.GuideShip
         {
 			if (IsSinking) 
 			{
-				if (transform.position.y < -8) gameObject.SetActive (false);
+				if (transform.position.y < -12) gameObject.SetActive (false);
 			}
 			else 
 			{

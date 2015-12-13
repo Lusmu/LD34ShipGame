@@ -20,6 +20,9 @@ namespace IfelseMedia.GuideShip
         public TransportState CurrentState { get; private set; }
 
         [SerializeField]
+        private float distanceToFullThrust = 40;
+
+        [SerializeField]
 		private ParticleSystem distressTorch;
 		[SerializeField]
 		private ParticleSystem happyTorch;
@@ -110,13 +113,13 @@ namespace IfelseMedia.GuideShip
 						else ship.Rudder = 0;
 
 						var sqrDistance = (transform.position - beacon.transform.position).sqrMagnitude;
-						if (sqrDistance > 40) 
+						if (sqrDistance > distanceToFullThrust) 
 						{
 							ship.Thrust = 1;
 						}
 						else if (sqrDistance > 20) 
 						{
-							ship.Thrust = (sqrDistance - 20) / 20;
+							ship.Thrust = (sqrDistance - distanceToFullThrust * 0.5f) / (distanceToFullThrust * 0.5f);
 						}
 						else 
 						{

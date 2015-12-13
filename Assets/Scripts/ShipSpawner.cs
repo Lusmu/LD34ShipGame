@@ -10,7 +10,12 @@ namespace IfelseMedia.GuideShip
 		[SerializeField]
 		private TransportAIController prefab;
 
-		[SerializeField]
+        [SerializeField]
+        private float minPlayerScore = 0;
+        [SerializeField]
+        private float maxPlayerScore = 0;
+
+        [SerializeField]
 		private float spawnCheckRadius = 5;
 
 		[SerializeField]
@@ -26,7 +31,11 @@ namespace IfelseMedia.GuideShip
 
 		void Update () 
 		{
-			if (timeTillNextSpawn <= 0 && IsInDespawnerRange()) 
+            if (minPlayerScore > 0 && GameManager.Instace.Player.Score < minPlayerScore) return;
+
+            if (minPlayerScore > 0 && GameManager.Instace.Player.Score > maxPlayerScore) return;
+
+            if (timeTillNextSpawn <= 0 && IsInDespawnerRange()) 
 			{
 				var randomPosition = transform.position +
 					Vector3.forward * Random.Range(-spawnRadius, spawnRadius) +
