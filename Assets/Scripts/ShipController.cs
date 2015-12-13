@@ -177,12 +177,18 @@ namespace IfelseMedia.GuideShip
 				{
 					Sink ();
 				}
+				else if (amount > 1) 
+				{
+					SoundManager.Instance.PlayEffect (SoundEffect.Hurt, transform.position);
+				}
 			}
 		}
 
 		public void Sink()
 		{
 			if (IsSinking) return;
+
+			SoundManager.Instance.PlayEffect (SoundEffect.Boom, transform.position);
 		
 			IsSinking = true;
 

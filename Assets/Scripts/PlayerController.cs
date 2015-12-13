@@ -103,6 +103,7 @@ namespace IfelseMedia.GuideShip
 
             if (updated)
             {
+				SoundManager.Instance.PlayEffect (SoundEffect.Levelup);
                 MessageManager.Instance.ShowMessage("Guiding Light Upgraded to Level " + stage);
                 levelUpParticles.Play();
             }

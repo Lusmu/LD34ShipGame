@@ -16001,6 +16001,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1864285487}
   - 114: {fileID: 1864285486}
+  - 114: {fileID: 1864285488}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -16035,6 +16036,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &1864285488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1864285485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad7cd9c872874f4ab22ecd827a2bfce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurt: {fileID: 8300000, guid: 1633531822d2b4327bce1795b0feaef1, type: 3}
+  boom: {fileID: 8300000, guid: 6e8fbab6fc88f44c18d4dc432b3b6cad, type: 3}
+  levelup: {fileID: 8300000, guid: a3c0eae042a5e4aef80bee2bbb592059, type: 3}
+  blib: {fileID: 8300000, guid: 8c563dc3e885640a3b969433488b29c6, type: 3}
+  blibSoft: {fileID: 8300000, guid: 5ce0a5b3d40764e71a63db5f8aec25e8, type: 3}
 --- !u!1 &1868550860
 GameObject:
   m_ObjectHideFlags: 0

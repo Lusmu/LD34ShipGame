@@ -83,6 +83,8 @@ namespace IfelseMedia.GuideShip
 
 			if (CurrentState == GameState.ReadyToPlay && Input.anyKey) 
 			{
+				SoundManager.Instance.PlayEffect (SoundEffect.Blib);
+
 				CurrentState = GameState.Playing;
 				var tween = LeanTween.moveY (readyToPlayPanel, 500, 1);
 				tween.setEase (LeanTweenType.easeInElastic);

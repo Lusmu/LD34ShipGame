@@ -43,6 +43,7 @@ namespace IfelseMedia.GuideShip
         {    
 			if (currentMessage == null && messages.Count > 0)
             {
+				SoundManager.Instance.PlayEffect (SoundEffect.BlibSoft);
                 messagePanel.gameObject.SetActive(true);
 
                 currentMessage = messages.Dequeue();
