@@ -18,8 +18,7 @@
 			float depth;
 		};
 
-		half _Glossiness;
-		half _Metallic;
+		half _Shininess;
 		fixed4 _Color;
 		
 		void vert(inout appdata_full v, out Input o)

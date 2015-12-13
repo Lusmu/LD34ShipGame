@@ -94,15 +94,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: 0.169
-      data:
-        first:
-          name: _Amount
-        second: 0.75
-      data:
-        first:
-          name: _TextureScale
-        second: 0.2
+        second: 0.043
       data:
         first:
           name: _Parallax
@@ -139,6 +131,14 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _Amount
+        second: 0.75
+      data:
+        first:
+          name: _TextureScale
+        second: 0.2
     m_Colors:
       data:
         first:

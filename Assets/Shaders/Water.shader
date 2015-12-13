@@ -43,7 +43,7 @@
 			o.Albedo = tex.rgb * _Color.rgb;
 			o.Gloss = tex.a;
 			o.Alpha = tex.a * _Color.a;
-			o.Specular = _Shininess;
+			o.Specular = _Shininess * clamp(1 - IN.worldPos.y,0,1);
 		}
 
 		ENDCG
