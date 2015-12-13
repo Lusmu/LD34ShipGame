@@ -131,9 +131,10 @@ namespace IfelseMedia.GuideShip
         {
 			if (ship.IsSinking) return;
 
-			if (beacons.Count == 0) 
+            if (happyFlare) happyFlare.Play(true);
+
+            if (beacons.Count == 0) 
 			{
-				if (happyFlare) happyFlare.Play (true);
 				if (distressTorch) distressTorch.Stop (true);
 				if (happyTorch) happyTorch.Play (true);
 			}
