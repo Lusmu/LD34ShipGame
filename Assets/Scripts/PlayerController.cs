@@ -7,7 +7,13 @@ namespace IfelseMedia.GuideShip
     {
         public ShipController ship;
 
+        public Transform harbour;
+
+        public ParticleSystem homeFlare;
+
         public int Score { get; set; }
+
+        float lastFiredHomeFlare = 0;
 
         // Use this for initialization
         void Start()
@@ -25,6 +31,16 @@ namespace IfelseMedia.GuideShip
 			{
 				ship.Rudder = Input.GetAxis("Horizontal");
 			}
+
+            if (ship.isActiveAndEnabled && !ship.IsSinking && harbour && homeFlare)
+            {
+                var distSqr = (ship.transform.position - harbour.position).sqrMagnitude;
+                if (distSqr > 100 * 100 && Time.time > lastFiredHomeFlare + 10)
+                {
+                    lastFiredHomeFlare = Time.time;
+                    homeFlare.Play();
+                }
+            }
         }
     }
 }

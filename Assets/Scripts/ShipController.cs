@@ -80,11 +80,6 @@ namespace IfelseMedia.GuideShip
 			if (boyancy) boyancy.enabled = true;
 		}
 
-        void OnDisable()
-        {
-            Debug.Log("Disabled", gameObject);
-        }
-
         void Update()
         {
             RockShip();
