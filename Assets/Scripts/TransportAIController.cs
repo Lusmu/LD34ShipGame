@@ -23,6 +23,9 @@ namespace IfelseMedia.GuideShip
         private float distanceToFullThrust = 40;
 
         [SerializeField]
+        private LineRenderer towLine;
+
+        [SerializeField]
 		private ParticleSystem distressTorch;
 		[SerializeField]
 		private ParticleSystem happyTorch;
@@ -30,6 +33,8 @@ namespace IfelseMedia.GuideShip
 		private ParticleSystem distressFlare;
         [SerializeField]
         private ParticleSystem happyFlare;
+
+        private static bool greetingMessageGiven = false;
 
         [SerializeField]
         private int score = 1;
@@ -125,10 +130,15 @@ namespace IfelseMedia.GuideShip
 						{
 							ship.Thrust = -0.1f;
 						}
-					}
+
+                        towLine.gameObject.SetActive(true);
+                        towLine.SetPosition(0, towLine.transform.position);
+                        towLine.SetPosition(1, beacon.transform.parent.position);
+                    }
 					else
 					{
-						beacons.RemoveAt(0);
+                        towLine.gameObject.SetActive(false);
+                        beacons.RemoveAt(0);
 					}
 				}
 				else
@@ -150,7 +160,7 @@ namespace IfelseMedia.GuideShip
 				if (distressTorch) distressTorch.Stop (true);
 				if (happyTorch) happyTorch.Play (true);
 
-                if (UnityEngine.Random.value < 0.25f)
+                if (UnityEngine.Random.value < 0.1f || !greetingMessageGiven)
                 {
                     var col = beacon.GetComponent<Collider>();
                     if (col != null)
@@ -159,6 +169,7 @@ namespace IfelseMedia.GuideShip
 
                         if (rb != null && rb.gameObject == GameManager.Instace.Player.ship.gameObject)
                         {
+                            greetingMessageGiven = true;
                             MessageManager.Instance.ShowMessage("\"Hi! Could you guide us to harbor?\"");
                         }
                     }

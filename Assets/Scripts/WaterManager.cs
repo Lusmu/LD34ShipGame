@@ -34,7 +34,7 @@ namespace IfelseMedia.GuideShip
 		{
 			var k = Mathf.Sin (90 - cam.transform.eulerAngles.x) * cam.transform.position.y;
 			var camLookDistance = Mathf.Sqrt (k * k + cam.transform.position.y * cam.transform.position.y);
-			var pos = cam.transform.position + cam.transform.forward * camLookDistance;
+			var pos = cam.transform.position + cam.transform.forward * camLookDistance * 1.2f;
 
 			pos.y = 0;
 			pos.x = Mathf.Floor (pos.x * 0.2f) * 5;

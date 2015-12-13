@@ -106,6 +106,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &167674
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 468230}
+  - 120: {fileID: 12079456}
+  m_Layer: 0
+  m_Name: TowRenderer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &179616
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +176,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136714}
   m_LocalRotation: {x: 0.5000001, y: 0.5, z: 0.5, w: 0.49999994}
-  m_LocalPosition: {x: 0, y: 0.45, z: -0.574}
+  m_LocalPosition: {x: 0, y: 0.34, z: -0.574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 419604}
@@ -172,13 +188,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.52, z: 0}
+  m_LocalPosition: {x: 0, y: 0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 419788}
   - {fileID: 406538}
   - {fileID: 484642}
   - {fileID: 456890}
+  - {fileID: 468230}
   m_Father: {fileID: 419604}
   m_RootOrder: 2
 --- !u!4 &419604
@@ -215,7 +232,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196754}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 1.06, z: -1.154}
+  m_LocalPosition: {x: 0, y: 0.95, z: -1.154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 419604}
@@ -232,6 +249,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 412200}
   m_RootOrder: 3
+--- !u!4 &468230
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167674}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.367, z: 0.799}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412200}
+  m_RootOrder: 4
 --- !u!4 &484642
 Transform:
   m_ObjectHideFlags: 1
@@ -392,6 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af742c976c75fbd4eb3659113d257c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToFullThrust: 40
+  towLine: {fileID: 12079456}
   distressTorch: {fileID: 19869934}
   happyTorch: {fileID: 19868874}
   distressFlare: {fileID: 19811614}
@@ -412,7 +443,7 @@ MonoBehaviour:
   armor: 0.5
   visualsRoot: {fileID: 412200}
   rockAmount: 8
-  maxThrustForward: 11
+  maxThrustForward: 12
   minDrag: 2
   maxDrag: 4
   maxRudder: 60
@@ -428,8 +459,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e85994732984c5abe29c65c00ea5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 1.4
+  strength: 1.3
   wind: {x: 0.5, y: 0, z: 0}
+--- !u!120 &12079456
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167674}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 84142002cb80ba64997f4f1a83e52016, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 0.3
+    endWidth: 0.15
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 1426061756
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 2466248637
+  m_UseWorldSpace: 1
 --- !u!136 &13604720
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -6692,7 +6762,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxThrustForward
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxRudder
