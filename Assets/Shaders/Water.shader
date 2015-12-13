@@ -17,11 +17,13 @@
 		#pragma surface surf BlinnPhong vertex:vert alpha
 
 		sampler2D _MainTex;
-		float _WaveHeight;
+		//float _WaveHeight;
+		//half _WaveScale;
 		float _TextureScale;
 		fixed4 _Color;
 		half _Shininess;
 		half _WaveTime;
+
 
 		struct Input {
 			float2 uv_MainTex;
@@ -33,7 +35,7 @@
 			UNITY_INITIALIZE_OUTPUT(Input, o);
 			float3 worldPos = mul(_Object2World, v.vertex).xyz;
 			//v.vertex.y = sin(_WaveTime + worldPos.x + worldPos.z) * _WaveHeight;
-			v.vertex.y = sin(_WaveTime + worldPos.x) * _WaveHeight;
+			v.vertex.y = sin(_WaveTime + worldPos.x);
 			o.worldPos = worldPos;
 		}
 

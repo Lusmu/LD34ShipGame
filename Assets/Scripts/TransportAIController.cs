@@ -143,7 +143,8 @@ namespace IfelseMedia.GuideShip
 				}
 				else
 				{
-					ship.Thrust = 0;
+                    towLine.gameObject.SetActive(false);
+                    ship.Thrust = 0;
 				}
 			}
             

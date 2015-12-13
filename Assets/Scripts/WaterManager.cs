@@ -17,10 +17,16 @@ namespace IfelseMedia.GuideShip
         private float _waveTime = 1;
         public static float waveTime = 0.75f;
 
+        [SerializeField]
+        private float _waveScale = 2;
+        public static float waveScale = 2f;
+
         void Update()
 		{
             waveHeight = _waveHeight;
             waveTime = _waveTime;
+            waveScale = _waveScale;
+            Shader.SetGlobalFloat("_WaveScale", waveScale);
             Shader.SetGlobalFloat ("_WaveHeight", waveHeight);
 			Shader.SetGlobalFloat ("_WaveTime", Time.time * waveTime);
 		}
@@ -45,7 +51,7 @@ namespace IfelseMedia.GuideShip
 
 		public static float GetWaveHeight(Vector3 pos)
 		{
-			return Mathf.Sin(Time.time * waveTime - pos.x * 0.25f) * waveHeight;
+			return Mathf.Sin(Time.time * waveTime - pos.x * 0.25f * waveScale) * waveHeight;
 		}
     }
 }
