@@ -141,7 +141,7 @@ namespace IfelseMedia.GuideShip
 
         public void EnteredBeaconRange(Beacon beacon)
         {
-			if (ship.IsSinking) return;
+			if (ship.IsSinking || CurrentState == TransportState.GoingHome) return;
 
             if (happyFlare) happyFlare.Play(true);
 
@@ -174,7 +174,7 @@ namespace IfelseMedia.GuideShip
 
         public void ExitBeaconRange(Beacon beacon)
         {
-			if (ship.IsSinking) return;
+			if (ship.IsSinking || CurrentState == TransportState.GoingHome) return;
 
 			if (beacons.Count == 1) 
 			{

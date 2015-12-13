@@ -60,6 +60,8 @@ namespace IfelseMedia.GuideShip
             scoreLabel.text = Player.Score.ToString();
             var tween = LeanTween.scale(scoreLabel.gameObject, Vector3.one, 0.5f);
             tween.setEase(LeanTweenType.punch);
+
+            Player.SetBeaconStage(1 + Mathf.CeilToInt(Player.Score * 0.1f));
         }
 
         void Update()
