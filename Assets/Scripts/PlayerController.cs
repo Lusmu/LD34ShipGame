@@ -7,6 +7,8 @@ namespace IfelseMedia.GuideShip
     {
         public ShipController ship;
 
+        public int Score { get; set; }
+
         // Use this for initialization
         void Start()
         {

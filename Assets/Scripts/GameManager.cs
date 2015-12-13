@@ -21,6 +21,11 @@ namespace IfelseMedia.GuideShip
 
 		public Transform despawner;
 
+        [SerializeField]
+        private PlayerController Player;
+        [SerializeField]
+        private UnityEngine.UI.Text scoreLabel;
+
 		void Awake()
 		{
 			instance = this;
@@ -29,6 +34,12 @@ namespace IfelseMedia.GuideShip
         public void Restart()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public void AddScore(int amount)
+        {
+            Player.Score += amount;
+            scoreLabel.text = Player.Score.ToString();
         }
 	}
 }

@@ -28,6 +28,9 @@ namespace IfelseMedia.GuideShip
         [SerializeField]
         private ParticleSystem happyFlare;
 
+        [SerializeField]
+        private int score = 1;
+
         public void EnteredHome(Home home)
         {
             if (CurrentState != TransportState.GoingHome)
@@ -44,6 +47,8 @@ namespace IfelseMedia.GuideShip
         IEnumerator EnteredHome_Coroutine()
         {
             CurrentState = TransportState.GoingHome;
+
+            GameManager.Instace.AddScore(score);
 
             if (happyFlare) happyFlare.Play(true);
 
