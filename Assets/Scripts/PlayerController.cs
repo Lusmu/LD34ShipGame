@@ -11,6 +11,8 @@ namespace IfelseMedia.GuideShip
 
         public ParticleSystem homeFlare;
 
+        public ParticleSystem levelUpParticles;
+
         public int Score { get; set; }
 
         float lastFiredHomeFlare = 0;
@@ -57,14 +59,14 @@ namespace IfelseMedia.GuideShip
             {
                 case 2:
                     updated = true;
-                    beacon.GetComponent<Light>().range = 20;
-                    beacon.GetComponent<Light>().intensity = 1.1f;
+                    beacon.GetComponent<Light>().range = 15;
+                    beacon.GetComponent<Light>().intensity = 1f;
                     beacon.GetComponent<SphereCollider>().radius = 8;
                     beacon.GetComponentInChildren<ParticleSystem>().startSize = 1.2f;
                     break;
                 case 3:
                     updated = true;
-                    beacon.GetComponent<Light>().range = 24;
+                    beacon.GetComponent<Light>().range = 20;
                     beacon.GetComponent<Light>().intensity = 1.2f;
                     beacon.GetComponent<SphereCollider>().radius = 1;
                     beacon.GetComponentInChildren<ParticleSystem>().startSize = 1.4f;
@@ -85,7 +87,11 @@ namespace IfelseMedia.GuideShip
                     break;
             }
 
-            if (updated) MessageManager.Instance.ShowMessage("Guiding Light Upgraded to Level " + stage);
+            if (updated)
+            {
+                MessageManager.Instance.ShowMessage("Guiding Light Upgraded to Level " + stage);
+                levelUpParticles.Play();
+            }
         }
     }
 }
