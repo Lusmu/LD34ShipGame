@@ -102,7 +102,7 @@ namespace IfelseMedia.GuideShip
 			{
 				if (transform.position.y < -12) gameObject.SetActive (false);
 			}
-			else 
+			else if (GameManager.Instace.CurrentState == GameState.Playing)
 			{
 				var appliedRudder = Rudder * (1 - (speedForMaxRudder - Physics.velocity.magnitude) / speedForMaxRudder) * maxRudder;
 
@@ -166,6 +166,8 @@ namespace IfelseMedia.GuideShip
 
 		public void TakeDamage(float amount, bool ignoreArmor = false)
 		{
+			if (GameManager.Instace.CurrentState != GameState.Playing) return;
+			
 			if (ignoreArmor || amount > armor) 
 			{
 				if (!ignoreArmor) amount -= armor;

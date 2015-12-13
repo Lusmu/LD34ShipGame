@@ -34,6 +34,8 @@ namespace IfelseMedia.GuideShip
 
         void Update()
         {
+			if (GameManager.Instace.CurrentState != GameState.Playing) return;
+
 			if (Input.touchCount == 1) 
 			{
 				ship.Rudder = Input.touches [0].position.x < Screen.width * 0.5f ? -1 : 1;

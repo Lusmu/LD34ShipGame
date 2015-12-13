@@ -17,27 +17,31 @@ namespace IfelseMedia.GuideShip
 
         private float messageHideTime;
 
-        private string currentMessage;
+		private string currentMessage = null;
 
         void Awake()
         {
             Instance = this;
         }
 
-        void Start()
-        {
-            ShowMessage("Guide Lost Ships to Harbor");
-            ShowTopMessage(2);
-        }
-
         public void ShowMessage(string message, float delay = 0)
         {
-            if (!messages.Contains(message)) messages.Enqueue(message);
+			if (!messages.Contains (message)) 
+			{
+				StartCoroutine (ShowMessageDelayed_Coroutine (message, delay));
+			}
         }
 
+		IEnumerator ShowMessageDelayed_Coroutine(string message, float delay = 0)
+		{
+			yield return new WaitForSeconds (delay);
+
+			if (!messages.Contains(message)) messages.Enqueue(message);
+		}
+
         private void ShowTopMessage(float delay = 0)
-        {           
-            if (messages.Count > 0)
+        {    
+			if (currentMessage == null && messages.Count > 0)
             {
                 messagePanel.gameObject.SetActive(true);
 
@@ -52,17 +56,12 @@ namespace IfelseMedia.GuideShip
                 tween.delay = delay;
                 tween.setEase(LeanTweenType.easeOutElastic);
             }
-            else
-            {
-                if (currentMessage != null)
-                {
-                    HideMessage(true);
-                }
-            }
         }
 
         private void HideMessage(bool animated = false)
         {
+			if (currentMessage == null) return;
+
             currentMessage = null;
 
             if (animated)
@@ -81,8 +80,12 @@ namespace IfelseMedia.GuideShip
         {
 	        if (Time.time > messageHideTime)
             {
-                ShowTopMessage();
+				HideMessage();
             }
+			if (currentMessage == null) 
+			{
+				ShowTopMessage ();
+			}
 	    }
     }
 }

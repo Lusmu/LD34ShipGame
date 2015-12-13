@@ -23,9 +23,10 @@ namespace IfelseMedia.GuideShip
 
 			var pos = transform.position;
 			var diff = Mathf.Clamp01(waterLevel - pos.y);
+			var currentWind = GameManager.Instace.CurrentState == GameState.Playing ? wind : Vector3.zero;
 			if (diff > 0)
 			{
-				physics.AddForce(wind + Vector3.up * 2000 * diff * diff * Time.deltaTime, ForceMode.Acceleration);
+				physics.AddForce(currentWind + Vector3.up * 2000 * diff * diff * Time.deltaTime, ForceMode.Acceleration);
 			}
 		}
 

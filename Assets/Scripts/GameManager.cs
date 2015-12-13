@@ -4,6 +4,13 @@ using System.Collections;
 
 namespace IfelseMedia.GuideShip
 {
+	public enum GameState
+	{
+		ReadyToPlay,
+		Playing,
+		GameOver
+	}
+
 	public class GameManager : MonoBehaviour 
 	{
 		private static GameManager instance;
@@ -18,17 +25,22 @@ namespace IfelseMedia.GuideShip
 				return instance;
 			}
 		}
+	
+		public GameState CurrentState { get; private set; }
 
 		public Transform despawner;
 
         public PlayerController Player;
         [SerializeField]
         private UnityEngine.UI.Text scoreLabel;
+		[SerializeField]
+		private GameObject readyToPlayPanel;
 
 		void Awake()
 		{
 			instance = this;
             Application.targetFrameRate = 60;
+			CurrentState = GameState.ReadyToPlay;
 		}
 
         void OnEnable()
@@ -68,6 +80,16 @@ namespace IfelseMedia.GuideShip
         void Update()
         {
             if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+
+			if (CurrentState == GameState.ReadyToPlay && Input.anyKey) 
+			{
+				CurrentState = GameState.Playing;
+				var tween = LeanTween.moveY (readyToPlayPanel, 500, 1);
+				tween.setEase (LeanTweenType.easeInElastic);
+				tween.onComplete = () => { Destroy(readyToPlayPanel); };
+
+				MessageManager.Instance.ShowMessage("Guide Lost Ships to Harbor", 2);
+			}
         }
 	}
 }
