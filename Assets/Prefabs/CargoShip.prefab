@@ -351,7 +351,7 @@ MonoBehaviour:
   armor: 0.5
   visualsRoot: {fileID: 412200}
   rockAmount: 8
-  maxThrustForward: 9
+  maxThrustForward: 10
   minDrag: 2
   maxDrag: 3
   maxRudder: 70
@@ -3500,7 +3500,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxThrustForward
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxRudder
