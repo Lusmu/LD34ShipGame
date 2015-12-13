@@ -24,7 +24,9 @@ namespace IfelseMedia.GuideShip
 		[SerializeField]
 		private ParticleSystem happyTorch;
 		[SerializeField]
-		private ParticleSystem distressFlare;      
+		private ParticleSystem distressFlare;
+        [SerializeField]
+        private ParticleSystem happyFlare;
 
         public void EnteredHome(Home home)
         {
@@ -34,9 +36,16 @@ namespace IfelseMedia.GuideShip
             }
         }
 
+        void OnEnabled()
+        {
+            beacons = new List<Beacon>();
+        }
+
         IEnumerator EnteredHome_Coroutine()
         {
             CurrentState = TransportState.GoingHome;
+
+            if (happyFlare) happyFlare.Play(true);
 
             var despawner = GetComponent<Despawnable>();
             if (despawner != null) despawner.enabled = false;
@@ -61,9 +70,6 @@ namespace IfelseMedia.GuideShip
 
             if (despawner != null) despawner.enabled = true;
         }
-
-        [SerializeField]
-		private ParticleSystem happyFlare;
 
         void Awake()
         {
