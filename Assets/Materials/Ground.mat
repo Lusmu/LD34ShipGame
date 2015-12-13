@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: UnderWater
-  m_Shader: {fileID: 4800000, guid: ad905e84c0bdaf348a0523c9d2d31de4, type: 3}
+  m_Name: Ground
+  m_Shader: {fileID: 4800000, guid: 4a036679e3abfcb4a988f580d4490bb7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2000
@@ -20,7 +20,7 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 2800000, guid: b7f29c56234aee5498cfe32d102885d3, type: 3}
-          m_Scale: {x: 6, y: 6}
+          m_Scale: {x: 4, y: 4}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -135,4 +135,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.413613, g: 0.41911763, b: 0.28968424, a: 1}
+        second: {r: 0.5147014, g: 0.60294116, b: 0.4300389, a: 1}
