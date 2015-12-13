@@ -21,6 +21,9 @@ namespace IfelseMedia.GuideShip
 
 		private float timeTillNextSpawn;
 
+        [SerializeField]
+        private int maxShips = 2;
+
 		void Update () 
 		{
 			if (timeTillNextSpawn <= 0 && IsInDespawnerRange()) 
@@ -34,7 +37,7 @@ namespace IfelseMedia.GuideShip
 				{
 					if (shipPool == null) 
 					{
-						shipPool = new ObjectPooler<TransportAIController>(prefab.gameObject, 2, 4);
+                        shipPool = new ObjectPooler<TransportAIController>(prefab.gameObject, 1, maxShips);
 					}
 
 					var ship = shipPool.Get ();

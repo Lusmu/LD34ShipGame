@@ -1,21 +1,68 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace IfelseMedia.GuideShip
 {
     public class TransportAIController : MonoBehaviour
     {
+        public enum TransportState
+        {
+            Lost,
+            Following,
+            GoingHome
+        }
+
         private ShipController ship;
         private List<Beacon> beacons = new List<Beacon>();
 
-		[SerializeField]
+        public TransportState CurrentState { get; private set; }
+
+        [SerializeField]
 		private ParticleSystem distressTorch;
 		[SerializeField]
 		private ParticleSystem happyTorch;
 		[SerializeField]
-		private ParticleSystem distressFlare;
-		[SerializeField]
+		private ParticleSystem distressFlare;      
+
+        public void EnteredHome(Home home)
+        {
+            if (CurrentState != TransportState.GoingHome)
+            {
+                StartCoroutine(EnteredHome_Coroutine());
+            }
+        }
+
+        IEnumerator EnteredHome_Coroutine()
+        {
+            CurrentState = TransportState.GoingHome;
+
+            var despawner = GetComponent<Despawnable>();
+            if (despawner != null) despawner.enabled = false;
+
+            ship.Physics.isKinematic = true;
+            ship.Physics.Sleep();
+
+            var euler = transform.eulerAngles;
+            euler.x = 90;
+            transform.eulerAngles = euler;
+
+            while (transform.position.y < 50)
+            {
+                transform.position += Vector3.up * Time.deltaTime * 10;
+                transform.eulerAngles += Vector3.up * Time.deltaTime * 180;
+                Debug.Log(transform.position.y);
+                yield return null;
+            }
+            Debug.Log("Done");
+
+            gameObject.SetActive(false);
+
+            if (despawner != null) despawner.enabled = true;
+        }
+
+        [SerializeField]
 		private ParticleSystem happyFlare;
 
         void Awake()
@@ -25,7 +72,7 @@ namespace IfelseMedia.GuideShip
 
         void Update()
         {
-			if (!ship) return;
+			if (!ship || CurrentState == TransportState.GoingHome) return;
 
 			if (ship.IsSinking) 
 			{
@@ -36,7 +83,7 @@ namespace IfelseMedia.GuideShip
 			{
 				if (beacons.Count > 0)
 				{
-					var beacon = beacons[0];
+					var beacon = beacons[beacons.Count - 1];
 					if (beacon != null)
 					{
 						Vector3 relativePos = beacon.transform.position - transform.position;

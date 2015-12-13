@@ -34,7 +34,7 @@ namespace IfelseMedia.GuideShip
         [SerializeField]
         private float speedForMaxRudder = 5;
 
-        private Rigidbody physics;
+        public Rigidbody Physics { get; set; }
 
 		public bool IsSinking { get; private set; }
 
@@ -57,17 +57,21 @@ namespace IfelseMedia.GuideShip
 
 		void OnEnable()
 		{
-			if (!physics) 
+			if (!Physics) 
 			{
-				physics = GetComponent<Rigidbody> ();
-				constraints = physics.constraints;
+				Physics = GetComponent<Rigidbody> ();
+				constraints = Physics.constraints;
 			}
 
-			physics.constraints = constraints;
+            Physics.isKinematic = false;
+            Physics.constraints = constraints;
 			IsSinking = false;
-			physics.velocity = Vector3.zero;
-			transform.rotation = Quaternion.identity;
-			physics.constraints = constraints;
+			Physics.velocity = Vector3.zero;
+            var euler = transform.eulerAngles;
+            euler.x = 0;
+            euler.z = 0;
+            transform.eulerAngles = euler;
+			Physics.constraints = constraints;
 			var pos = transform.position;
 			pos.y = 0;
 			transform.position = pos;
@@ -75,6 +79,11 @@ namespace IfelseMedia.GuideShip
 			var boyancy = GetComponent<Boyancy> ();
 			if (boyancy) boyancy.enabled = true;
 		}
+
+        void OnDisable()
+        {
+            Debug.Log("Disabled", gameObject);
+        }
 
         void Update()
         {
@@ -89,9 +98,9 @@ namespace IfelseMedia.GuideShip
 			}
 			else 
 			{
-				var appliedRudder = Rudder * (1 - (speedForMaxRudder - physics.velocity.magnitude) / speedForMaxRudder) * maxRudder;
+				var appliedRudder = Rudder * (1 - (speedForMaxRudder - Physics.velocity.magnitude) / speedForMaxRudder) * maxRudder;
 
-				physics.drag = TurnDependentDrag(appliedRudder);
+				Physics.drag = TurnDependentDrag(appliedRudder);
 
 				var localEuler = transform.localEulerAngles;
 				localEuler.x = 0;
@@ -99,11 +108,11 @@ namespace IfelseMedia.GuideShip
 				transform.localEulerAngles = localEuler;
 
 				Quaternion deltaRotation = Quaternion.Euler(Vector3.up * appliedRudder * Time.deltaTime);
-				physics.MoveRotation(physics.rotation * deltaRotation);
+				Physics.MoveRotation(Physics.rotation * deltaRotation);
 
-				physics.AddRelativeForce(thrust * Vector3.forward * maxThrustForward, ForceMode.Force);
+				Physics.AddRelativeForce(thrust * Vector3.forward * maxThrustForward, ForceMode.Force);
 
-				if (Thrust > 0.75f && physics.velocity.sqrMagnitude < 0.1f) 
+				if (Thrust > 0.75f && Physics.velocity.sqrMagnitude < 0.1f) 
 				{
 					stationaryTime += Time.deltaTime;
 
@@ -176,11 +185,11 @@ namespace IfelseMedia.GuideShip
 
 		IEnumerator Sink_Coroutine()
 		{
-			physics.constraints = RigidbodyConstraints.None;
+			Physics.constraints = RigidbodyConstraints.None;
 
 			yield return new WaitForSeconds (2);
 
-			physics.drag = 10;
+			Physics.drag = 10;
 
 			var boyancy = GetComponent<Boyancy> ();
 			if (boyancy) boyancy.enabled = false;
