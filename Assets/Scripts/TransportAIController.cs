@@ -39,10 +39,6 @@ namespace IfelseMedia.GuideShip
 					var beacon = beacons[0];
 					if (beacon != null)
 					{
-						var sqrDistance = (transform.position - beacon.transform.position).sqrMagnitude;
-						if (sqrDistance > 25) ship.Thrust = 1;
-						else ship.Thrust = -0.1f;
-
 						Vector3 relativePos = beacon.transform.position - transform.position;
 
 						var deltaRotation = AngleDir(transform.forward, relativePos, Vector3.up);
@@ -50,6 +46,20 @@ namespace IfelseMedia.GuideShip
 						if (deltaRotation < 0) ship.Rudder = -1;
 						else if (deltaRotation > 0) ship.Rudder = 1;
 						else ship.Rudder = 0;
+
+						var sqrDistance = (transform.position - beacon.transform.position).sqrMagnitude;
+						if (sqrDistance > 40) 
+						{
+							ship.Thrust = 1;
+						}
+						else if (sqrDistance > 20) 
+						{
+							ship.Thrust = (sqrDistance - 20) / 20;
+						}
+						else 
+						{
+							ship.Thrust = -0.1f;
+						}
 					}
 					else
 					{

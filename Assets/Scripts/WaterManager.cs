@@ -4,18 +4,21 @@ using System.Collections.Generic;
 
 namespace IfelseMedia.GuideShip
 {
-
     public class WaterManager : MonoBehaviour
     {
         [SerializeField]
         private GameObject waterPlane;
 
-        [SerializeField]
-        private float textureScale = 1;
+		public static float waveHeight = 0.75f;
+
+		void Update()
+		{
+			Shader.SetGlobalFloat ("_WaveHeight", waveHeight);
+			Shader.SetGlobalFloat ("_WaveTime", Time.time);
+		}
 
         void LateUpdate()
         {
-            //OnUpdateScreenSize();
 			if (Camera.main) UpdateCameraCenter(Camera.main);
         }
 
@@ -25,14 +28,6 @@ namespace IfelseMedia.GuideShip
 			var camLookDistance = Mathf.Sqrt (k * k + cam.transform.position.y * cam.transform.position.y);
 			var pos = cam.transform.position + cam.transform.forward * camLookDistance;
 
-
-			/*
-			var rot = transform.eulerAngles;
-			rot.y = cam.transform.eulerAngles.y;
-			transform.eulerAngles = rot;*/
-
-			//var pos = cam.transform.position;
-			//pos += cam.transform.forward * 5;
 			pos.y = 0;
 			pos.x = Mathf.Floor (pos.x * 0.2f) * 5;
 			pos.z = Mathf.Floor (pos.z * 0.2f) * 5;
@@ -40,12 +35,9 @@ namespace IfelseMedia.GuideShip
 
 		}
 
-        void OnUpdateScreenSize()
-        {
-            var ratio = ((float)Screen.width / (float)Screen.height);
-            var size = waterPlane.transform.localScale;
-            size.x = size.z * ratio;
-            waterPlane.transform.localScale = size;
-        }
+		public static float GetWaveHeight(Vector3 pos)
+		{
+			return Mathf.Sin(Time.time - pos.x * 0.25f) * waveHeight;
+		}
     }
 }

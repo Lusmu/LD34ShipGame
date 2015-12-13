@@ -19,7 +19,6 @@ namespace IfelseMedia.GuideShip
 
         [SerializeField]
         private float maxThrustForward = 10;
-        private float maxThrustBackward = 5;
 
         [SerializeField]
         private float minDrag = 1;
@@ -41,6 +40,8 @@ namespace IfelseMedia.GuideShip
 
 		private float stationaryTime = 0;
 
+		private RigidbodyConstraints constraints;
+
         private float thrust;
         public float Thrust
         {
@@ -54,10 +55,26 @@ namespace IfelseMedia.GuideShip
             }
         }
 
-        void Start()
-        {
-            physics = GetComponent<Rigidbody>();
-        }
+		void OnEnable()
+		{
+			if (!physics) 
+			{
+				physics = GetComponent<Rigidbody> ();
+				constraints = physics.constraints;
+			}
+
+			physics.constraints = constraints;
+			IsSinking = false;
+			physics.velocity = Vector3.zero;
+			transform.rotation = Quaternion.identity;
+			physics.constraints = constraints;
+			var pos = transform.position;
+			pos.y = 0;
+			transform.position = pos;
+
+			var boyancy = GetComponent<Boyancy> ();
+			if (boyancy) boyancy.enabled = true;
+		}
 
         void Update()
         {
@@ -66,31 +83,36 @@ namespace IfelseMedia.GuideShip
 
         void FixedUpdate()
         {
-			if (IsSinking) return;
-
-            var appliedRudder = Rudder * (1 - (speedForMaxRudder - physics.velocity.magnitude) / speedForMaxRudder) * maxRudder;
-
-            physics.drag = TurnDependentDrag(appliedRudder);
-
-            var localEuler = transform.localEulerAngles;
-            localEuler.x = 0;
-            localEuler.z = 0;
-            transform.localEulerAngles = localEuler;
-
-            Quaternion deltaRotation = Quaternion.Euler(Vector3.up * appliedRudder * Time.deltaTime);
-            physics.MoveRotation(physics.rotation * deltaRotation);
-
-            physics.AddRelativeForce(thrust * Vector3.forward * maxThrustForward, ForceMode.Force);
-
-			if (Thrust > 0.75f && physics.velocity.sqrMagnitude < 0.1f) 
+			if (IsSinking) 
 			{
-				stationaryTime += Time.deltaTime;
-
-				if (stationaryTime > 1) TakeDamage (Time.deltaTime * 0.5f, true);
+				if (transform.position.y < -8) gameObject.SetActive (false);
 			}
 			else 
 			{
-				stationaryTime = 0;
+				var appliedRudder = Rudder * (1 - (speedForMaxRudder - physics.velocity.magnitude) / speedForMaxRudder) * maxRudder;
+
+				physics.drag = TurnDependentDrag(appliedRudder);
+
+				var localEuler = transform.localEulerAngles;
+				localEuler.x = 0;
+				localEuler.z = 0;
+				transform.localEulerAngles = localEuler;
+
+				Quaternion deltaRotation = Quaternion.Euler(Vector3.up * appliedRudder * Time.deltaTime);
+				physics.MoveRotation(physics.rotation * deltaRotation);
+
+				physics.AddRelativeForce(thrust * Vector3.forward * maxThrustForward, ForceMode.Force);
+
+				if (Thrust > 0.75f && physics.velocity.sqrMagnitude < 0.1f) 
+				{
+					stationaryTime += Time.deltaTime;
+
+					if (stationaryTime > 1) TakeDamage (Time.deltaTime * 0.5f, true);
+				}
+				else 
+				{
+					stationaryTime = 0;
+				}
 			}
         }
 
@@ -133,7 +155,7 @@ namespace IfelseMedia.GuideShip
 			{
 				if (!ignoreArmor) amount -= armor;
 				damage += amount;
-				Debug.Log ("Damage: " + damage, gameObject);
+
 				if (damage >= hitPoins) 
 				{
 					Sink ();
@@ -145,6 +167,8 @@ namespace IfelseMedia.GuideShip
 		{
 			if (IsSinking) return;
 		
+			IsSinking = true;
+
 			Debug.Log ("Ship sunk", gameObject);
 
 			StartCoroutine (Sink_Coroutine ());
@@ -152,18 +176,14 @@ namespace IfelseMedia.GuideShip
 
 		IEnumerator Sink_Coroutine()
 		{
-			IsSinking = true;
-
-			physics.freezeRotation = false;
 			physics.constraints = RigidbodyConstraints.None;
 
 			yield return new WaitForSeconds (2);
 
 			physics.drag = 10;
 
-			physics.useGravity = true;
-
-			Destroy (this);
+			var boyancy = GetComponent<Boyancy> ();
+			if (boyancy) boyancy.enabled = false;
 		}
     }
 }

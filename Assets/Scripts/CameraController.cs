@@ -22,7 +22,8 @@ namespace IfelseMedia.GuideShip
         {
             if (target != null)
             {
-                var targetPosition = target.position + Vector3.up * offset.y - target.forward * offset.z;
+                var targetPosition = target.position - target.forward * offset.z;
+				targetPosition.y = offset.y;
                 var targetLookPosition = target.position;
 
                 var physics = target.GetComponent<Rigidbody>();
