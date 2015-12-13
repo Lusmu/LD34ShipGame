@@ -39,11 +39,6 @@ namespace IfelseMedia.GuideShip
         {           
             if (messages.Count > 0)
             {
-                if (currentMessage != null)
-                {
-                    HideMessage(false);
-                }
-
                 messagePanel.gameObject.SetActive(true);
 
                 currentMessage = messages.Dequeue();
