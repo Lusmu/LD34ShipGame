@@ -5,6 +5,8 @@ namespace IfelseMedia.GuideShip
     [RequireComponent(typeof(Rigidbody))]
     public class ShipController : MonoBehaviour
     {
+        public static event System.Action<ShipController> OnShipSink;
+
 		[SerializeField]
 		private float hitPoins = 10;
 		[SerializeField]
@@ -174,6 +176,11 @@ namespace IfelseMedia.GuideShip
 			IsSinking = true;
 
 			Debug.Log ("Ship sunk", gameObject);
+
+            if (OnShipSink != null)
+            {
+                OnShipSink(this);
+            }
 
 			StartCoroutine (Sink_Coroutine ());
 		}

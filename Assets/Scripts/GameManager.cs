@@ -30,6 +30,25 @@ namespace IfelseMedia.GuideShip
 			instance = this;
 		}
 
+        void OnEnable()
+        {
+            ShipController.OnShipSink += ShipController_OnShipSink;
+        }
+
+        void OnDisable()
+        {
+            ShipController.OnShipSink -= ShipController_OnShipSink;
+        }
+
+        private void ShipController_OnShipSink(ShipController ship)
+        {
+            if (ship == Player.ship)
+            {
+                MessageManager.Instance.ShowMessage("S.O.S.");
+                MessageManager.Instance.ShowMessage("Game Over");
+            }
+        }
+
         public void Restart()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
