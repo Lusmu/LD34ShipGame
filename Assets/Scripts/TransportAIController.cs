@@ -66,10 +66,8 @@ namespace IfelseMedia.GuideShip
             {
                 transform.position += Vector3.up * Time.deltaTime * 10;
                 transform.eulerAngles += Vector3.up * Time.deltaTime * 180;
-                Debug.Log(transform.position.y);
                 yield return null;
             }
-            Debug.Log("Done");
 
             gameObject.SetActive(false);
 
