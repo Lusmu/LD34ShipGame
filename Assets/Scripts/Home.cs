@@ -2,9 +2,12 @@
 using System.Collections;
 
 namespace IfelseMedia.GuideShip
-{ 
+{
     public class Home : MonoBehaviour
     {
+        [SerializeField]
+        private ParticleSystem effect;
+
         void OnTriggerEnter(Collider other)
         {
             var go = other.gameObject;
@@ -15,6 +18,9 @@ namespace IfelseMedia.GuideShip
             if (ship != null)
             {
                 ship.EnteredHome(this);
+
+                effect.transform.position = ship.transform.position;
+                effect.Play();
             }
         }
     }
