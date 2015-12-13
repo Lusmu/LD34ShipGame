@@ -48,6 +48,12 @@ namespace IfelseMedia.GuideShip
         {
             CurrentState = TransportState.GoingHome;
 
+            if (GameManager.Instace.Player.Score < 3 || GameManager.Instace.Player.Score % 3 == 0 ||
+                score >= 10)
+            {
+                MessageManager.Instance.ShowMessage("\"Thanks for the help!\"");
+            }
+
             GameManager.Instace.AddScore(score);
 
             if (happyFlare) happyFlare.Play(true);
@@ -140,7 +146,21 @@ namespace IfelseMedia.GuideShip
 			{
 				if (distressTorch) distressTorch.Stop (true);
 				if (happyTorch) happyTorch.Play (true);
-			}
+
+                if (UnityEngine.Random.value < 0.25f || GameManager.Instace.Player.Score == 0)
+                {
+                    var col = beacon.GetComponent<Collider>();
+                    if (col != null)
+                    {
+                        var rb = col.attachedRigidbody;
+
+                        if (rb != null && rb.gameObject == GameManager.Instace.Player.ship.gameObject)
+                        {
+                            MessageManager.Instance.ShowMessage("\"Hi! Could you guide us to harbor?\"");
+                        }
+                    }
+                }
+            }
 
 			if (!beacons.Contains (beacon)) 
 			{
@@ -160,7 +180,21 @@ namespace IfelseMedia.GuideShip
 				if (happyTorch) happyTorch.Stop (true);
 
 				Debug.Log ("Ship lost beacon", gameObject);
-			}
+
+                if (UnityEngine.Random.value < 0.25f)
+                {
+                    var col = beacon.GetComponent<Collider>();
+                    if (col != null)
+                    {
+                        var rb = col.attachedRigidbody;
+
+                        if (rb != null && rb.gameObject == GameManager.Instace.Player.ship.gameObject)
+                        {
+                            MessageManager.Instance.ShowMessage("\"Help! Where did you go?\"");
+                        }
+                    }
+                }
+            }
 
             if (beacons.Contains(beacon)) beacons.Remove(beacon);
         }

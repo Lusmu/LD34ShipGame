@@ -21,8 +21,7 @@ namespace IfelseMedia.GuideShip
 
 		public Transform despawner;
 
-        [SerializeField]
-        private PlayerController Player;
+        public PlayerController Player;
         [SerializeField]
         private UnityEngine.UI.Text scoreLabel;
 

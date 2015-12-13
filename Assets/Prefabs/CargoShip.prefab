@@ -412,10 +412,10 @@ MonoBehaviour:
   armor: 0.5
   visualsRoot: {fileID: 412200}
   rockAmount: 8
-  maxThrustForward: 10
+  maxThrustForward: 9
   minDrag: 2
-  maxDrag: 3
-  maxRudder: 70
+  maxDrag: 4
+  maxRudder: 60
   speedForMaxRudder: 3
 --- !u!114 &11485040
 MonoBehaviour:
@@ -6692,11 +6692,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxThrustForward
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxRudder
-      value: 70
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speedForMaxRudder
@@ -6705,6 +6705,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: wind.x
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxDrag
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
