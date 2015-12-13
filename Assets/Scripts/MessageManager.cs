@@ -32,7 +32,7 @@ namespace IfelseMedia.GuideShip
 
         public void ShowMessage(string message, float delay = 0)
         {
-            messages.Enqueue(message);
+            if (!messages.Contains(message)) messages.Enqueue(message);
         }
 
         private void ShowTopMessage(float delay = 0)

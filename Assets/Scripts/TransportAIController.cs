@@ -150,7 +150,7 @@ namespace IfelseMedia.GuideShip
 				if (distressTorch) distressTorch.Stop (true);
 				if (happyTorch) happyTorch.Play (true);
 
-                if (UnityEngine.Random.value < 0.25f || GameManager.Instace.Player.Score == 0)
+                if (UnityEngine.Random.value < 0.25f)
                 {
                     var col = beacon.GetComponent<Collider>();
                     if (col != null)
@@ -184,7 +184,7 @@ namespace IfelseMedia.GuideShip
 
 				Debug.Log ("Ship lost beacon", gameObject);
 
-                if (UnityEngine.Random.value < 0.25f)
+                if (UnityEngine.Random.value < 0.15f)
                 {
                     var col = beacon.GetComponent<Collider>();
                     if (col != null)
