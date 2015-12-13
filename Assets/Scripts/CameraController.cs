@@ -17,20 +17,35 @@ namespace IfelseMedia.GuideShip
 
         [SerializeField]
         private float prediction = 5;
-
+        
         void LateUpdate()
         {
             if (target != null)
             {
-                var targetPosition = target.position - target.forward * offset.z;
-				targetPosition.y = offset.y;
+                float zOffset = offset.z;
+                float yOffset = offset.y;
+                float appliedPrediction = prediction;
+                if (Screen.height > Screen.width)
+                {
+                    zOffset *= 0.7f;
+                    yOffset *= 0.4f;
+                    appliedPrediction *= 0.8f;
+                    Camera.main.fieldOfView = 50;
+                }
+                else
+                {
+                    Camera.main.fieldOfView = 30;
+                }
+
+                var targetPosition = target.position - target.forward * zOffset;
+				targetPosition.y = yOffset;
                 var targetLookPosition = target.position;
 
                 var physics = target.GetComponent<Rigidbody>();
                 if (physics != null)
                 {
-                    targetPosition -= physics.velocity * prediction;
-                    targetLookPosition += physics.velocity * prediction;
+                    targetPosition -= physics.velocity * appliedPrediction;
+                    targetLookPosition += physics.velocity * appliedPrediction;
                 }
 
                 transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * moveSpeed);
