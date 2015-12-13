@@ -61,5 +61,10 @@ namespace IfelseMedia.GuideShip
             var tween = LeanTween.scale(scoreLabel.gameObject, Vector3.one, 0.5f);
             tween.setEase(LeanTweenType.punch);
         }
+
+        void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+        }
 	}
 }
