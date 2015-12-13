@@ -50,6 +50,11 @@ namespace IfelseMedia.GuideShip
         void OnEnabled()
         {
             beacons = new List<Beacon>();
+
+			CurrentState = TransportState.Lost;
+
+			distressTorch.Play ();
+			happyTorch.Stop ();
         }
 
         IEnumerator EnteredHome_Coroutine()
@@ -95,6 +100,8 @@ namespace IfelseMedia.GuideShip
 
         void Update()
         {
+			towLine.gameObject.SetActive(CurrentState != TransportState.GoingHome && !ship.IsSinking && beacons.Count > 0);
+
 			if (!ship || CurrentState == TransportState.GoingHome) return;
 
 			if (ship.IsSinking) 
@@ -130,20 +137,17 @@ namespace IfelseMedia.GuideShip
 						{
 							ship.Thrust = -0.1f;
 						}
-
-                        towLine.gameObject.SetActive(true);
+							
                         towLine.SetPosition(0, towLine.transform.position);
                         towLine.SetPosition(1, beacon.transform.parent.position);
                     }
 					else
 					{
-                        towLine.gameObject.SetActive(false);
                         beacons.RemoveAt(0);
 					}
 				}
 				else
 				{
-                    towLine.gameObject.SetActive(false);
                     ship.Thrust = 0;
 				}
 			}

@@ -491,8 +491,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: 0.3
-    endWidth: 0.15
+    startWidth: 0.15
+    endWidth: 0.05
     m_StartColor:
       serializedVersion: 2
       rgba: 1426061756
@@ -5099,7 +5099,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 3
+      scalar: 2.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5257,13 +5257,13 @@ ParticleSystem:
         m_NumAlphaKeys: 2
       minColor:
         serializedVersion: 2
-        rgba: 2885662337
+        rgba: 2876702575
       maxColor:
         serializedVersion: 2
-        rgba: 2542796655
+        rgba: 751042415
       minMaxState: 2
     startSize:
-      scalar: 0.8
+      scalar: 0.6
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5421,7 +5421,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 5
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5455,11 +5455,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
       minMaxState: 0
-    cnt0: 10
+    cnt0: 3
     cnt1: 10
     cnt2: 10
     cnt3: 30
-    cntmax0: 10
+    cntmax0: 3
     cntmax1: 10
     cntmax2: 10
     cntmax3: 30
@@ -5467,21 +5467,16 @@ ParticleSystem:
     time1: 1
     time2: 1
     time3: 0
-    m_BurstCount: 2
+    m_BurstCount: 1
   SizeModule:
     enabled: 1
     curve:
-      scalar: 5
+      scalar: 4
       maxCurve:
         serializedVersion: 2
         m_Curve:
-        - time: 0.19471943
-          value: 0.14864862
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: 0.5631074
-          value: 0.08811177
+        - time: 0.56029046
+          value: 0.23096892
           inSlope: 0.15787204
           outSlope: 6.574058
           tangentMode: 1
@@ -5489,6 +5484,11 @@ ParticleSystem:
           value: 1
           inSlope: -0.37223512
           outSlope: -0.37223512
+          tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -6301,7 +6301,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     curve:
-      scalar: 3.1415925
+      scalar: 6.283185
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6310,31 +6310,21 @@ ParticleSystem:
           inSlope: 0
           outSlope: 0
           tangentMode: 0
-        - time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_RotationOrder: 0
       minCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: 1
-          value: 0
+          value: -1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 4
-      minMaxState: 0
+        m_RotationOrder: 0
+      minMaxState: 3
     separateAxes: 0
     range: {x: 0, y: 1}
   ColorBySpeedModule:
@@ -6597,8 +6587,8 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MinParticleSize: 0.01
+  m_MaxParticleSize: 0.25
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 1

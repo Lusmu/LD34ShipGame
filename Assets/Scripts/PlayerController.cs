@@ -19,6 +19,10 @@ namespace IfelseMedia.GuideShip
 
         int currentBeaconStage = 1;
 
+		float homeFlareDistance = 70;
+
+		static bool homeFlareHintGiven = false;
+
         [SerializeField]
         private Beacon beacon;
 
@@ -42,10 +46,16 @@ namespace IfelseMedia.GuideShip
             if (ship.isActiveAndEnabled && !ship.IsSinking && harbour && homeFlare)
             {
                 var distSqr = (ship.transform.position - harbour.position).sqrMagnitude;
-                if (distSqr > 100 * 100 && Time.time > lastFiredHomeFlare + 10)
+				if (distSqr > homeFlareDistance * homeFlareDistance && Time.time > lastFiredHomeFlare + 10)
                 {
                     lastFiredHomeFlare = Time.time;
                     homeFlare.Play();
+
+					if (!homeFlareHintGiven) 
+					{
+						homeFlareHintGiven = true;
+						MessageManager.Instance.ShowMessage ("Lost? Follow the yellow flares.");
+					}
                 }
             }
         }

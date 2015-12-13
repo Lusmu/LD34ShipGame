@@ -65,18 +65,27 @@ namespace IfelseMedia.GuideShip
 				constraints = Physics.constraints;
 			}
 
+			IsSinking = false;
+
             Physics.isKinematic = false;
             Physics.constraints = constraints;
-			IsSinking = false;
+			Physics.constraints = constraints;
 			Physics.velocity = Vector3.zero;
-            var euler = transform.eulerAngles;
+            
+			var euler = transform.eulerAngles;
             euler.x = 0;
             euler.z = 0;
             transform.eulerAngles = euler;
-			Physics.constraints = constraints;
+
 			var pos = transform.position;
 			pos.y = 0;
 			transform.position = pos;
+
+			Thrust = 0;
+			Rudder = 0;
+			damage = 0;
+			targetDirection = 0;
+			stationaryTime = 0;
 
 			var boyancy = GetComponent<Boyancy> ();
 			if (boyancy) boyancy.enabled = true;

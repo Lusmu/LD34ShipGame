@@ -14,7 +14,7 @@ GameObject:
   m_Layer: 0
   m_Name: GuidingShip
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -407,9 +407,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 2
-  m_Color: {r: 1, g: 0.91561866, b: 0.7647059, a: 1}
-  m_Intensity: 0.6
-  m_Range: 10
+  m_Color: {r: 1, g: 0.96572006, b: 0.9044118, a: 1}
+  m_Intensity: 0.8
+  m_Range: 11
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
