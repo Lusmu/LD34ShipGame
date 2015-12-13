@@ -9,12 +9,20 @@ namespace IfelseMedia.GuideShip
         [SerializeField]
         private GameObject waterPlane;
 
-		public static float waveHeight = 0.75f;
+        [SerializeField]
+        private float _waveHeight;
+        public static float waveHeight = 0.75f;
 
-		void Update()
+        [SerializeField]
+        private float _waveTime = 1;
+        public static float waveTime = 0.75f;
+
+        void Update()
 		{
-			Shader.SetGlobalFloat ("_WaveHeight", waveHeight);
-			Shader.SetGlobalFloat ("_WaveTime", Time.time);
+            waveHeight = _waveHeight;
+            waveTime = _waveTime;
+            Shader.SetGlobalFloat ("_WaveHeight", waveHeight);
+			Shader.SetGlobalFloat ("_WaveTime", Time.time * waveTime);
 		}
 
         void LateUpdate()
@@ -37,7 +45,7 @@ namespace IfelseMedia.GuideShip
 
 		public static float GetWaveHeight(Vector3 pos)
 		{
-			return Mathf.Sin(Time.time - pos.x * 0.25f) * waveHeight;
+			return Mathf.Sin(Time.time * waveTime - pos.x * 0.25f) * waveHeight;
 		}
     }
 }

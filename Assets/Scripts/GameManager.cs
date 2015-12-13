@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace IfelseMedia.GuideShip
@@ -24,5 +25,10 @@ namespace IfelseMedia.GuideShip
 		{
 			instance = this;
 		}
+
+        public void Restart()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 	}
 }
