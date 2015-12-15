@@ -47,7 +47,7 @@ namespace IfelseMedia.GuideShip
             }
         }
 
-        void OnEnabled()
+        void OnEnable()
         {
             beacons = new List<Beacon>();
 
@@ -55,7 +55,14 @@ namespace IfelseMedia.GuideShip
 
 			distressTorch.Play ();
 			happyTorch.Stop ();
+
+			Debug.Log ("AI enabled state=" + CurrentState + " beacons=" + beacons.Count, gameObject);
         }
+
+		void OnDisable()
+		{
+			Debug.Log ("AI disabled state=" + CurrentState + " beacons=" + beacons.Count, gameObject);
+		}
 
         IEnumerator EnteredHome_Coroutine()
         {
