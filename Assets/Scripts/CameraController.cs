@@ -30,11 +30,11 @@ namespace IfelseMedia.GuideShip
                     zOffset *= 0.7f;
                     yOffset *= 0.4f;
                     appliedPrediction *= 0.8f;
-                    Camera.main.fieldOfView = 50;
+                    Camera.main.fieldOfView = 70;
                 }
                 else
                 {
-                    Camera.main.fieldOfView = 30;
+                    Camera.main.fieldOfView = 50;
                 }
 
                 var targetPosition = target.position - target.forward * zOffset;
