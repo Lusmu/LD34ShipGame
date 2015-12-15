@@ -82,7 +82,7 @@ namespace IfelseMedia.GuideShip
                     updated = true;
                     beacon.GetComponent<Light>().range = 20;
                     beacon.GetComponent<Light>().intensity = 1.2f;
-                    beacon.GetComponent<SphereCollider>().radius = 1;
+                    beacon.GetComponent<SphereCollider>().radius = 11;
                     beacon.GetComponentInChildren<ParticleSystem>().startSize = 1.4f;
                     break;
                 case 4:
